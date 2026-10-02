@@ -1038,8 +1038,12 @@ span.partner-logo { background: var(--img) center / contain no-repeat; }
 .rl-bar i { position: absolute; inset: 0; background: linear-gradient(90deg, var(--amber-500), var(--sky-400)); transform: scaleX(0); transform-origin: left; border-radius: inherit; }
 .route-loader.is-active .rl-bar i { transform: scaleX(1); transition: transform 760ms cubic-bezier(.3, .7, .2, 1); }
 
-/* --- Transisi halaman untuk versi multi-file (View Transitions, progresif) --- */
-@view-transition { navigation: auto; }
+/* --- Layar transisi versi multi-file: halaman tujuan melanjutkan layar dari halaman sebelumnya --- */
+.route-loader.is-resume { transition: none; }
+.route-loader.is-resume .lg-ring, .route-loader.is-resume .lg-white, .route-loader.is-resume .lg-gold { animation: none; }
+.route-loader.is-resume .rl-bar i { transform: scaleX(.58); transition: none; }
+.route-loader.is-resume.is-done .rl-bar i { transform: scaleX(1); transition: transform 260ms var(--ease-out); }
+.route-loader.is-resume.is-out { transition: opacity 340ms var(--ease-out); }
 
 @media (prefers-reduced-motion: reduce) {
   .js .hero-in { animation: none; }

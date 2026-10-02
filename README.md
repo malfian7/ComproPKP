@@ -58,6 +58,7 @@ Drag folder ini ke halaman deploy (Netlify: app.netlify.com/drop), atau hubungka
 - Structured data (JSON-LD): Organization + WebSite di Beranda, BreadcrumbList di setiap halaman, BlogPosting di detail artikel, ContactPage di Hubungi Kami.
 - `sitemap.xml`, `robots.txt`, halaman 404 `noindex`, satu `<h1>` per halaman dengan urutan heading yang benar, alt text pada gambar.
 - Performa (Core Web Vitals): font dimuat tanpa memblokir render, gambar utama dimuat prioritas, gambar lain lazy-load, CLS 0. Skor Lighthouse lokal: SEO 100, Performance 99–100.
+- Layar transisi logogram PKP saat pindah halaman tidak memengaruhi SEO: tautan tetap `<a href>` biasa, kunjungan pertama dari Google tidak menampilkannya, dan halaman tujuan di-*prefetch* saat kursor menyentuh menu.
 - Untuk mengubah judul/description: edit `<title>`, `<meta name="description">`, dan `og:title`/`og:description` di bagian `<head>` tiap halaman.
 
 ## Setelah online

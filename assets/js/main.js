@@ -415,4 +415,61 @@ var PKP_CONTACT = {
 
   /* ---------- Tahun footer ---------- */
   $$("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
+
+  /* ---------- Layar transisi pindah halaman (versi multi-file / hosting) ----------
+     Klik menu/tautan internal → layar logogram PKP membesar dari titik klik (±0,44 dtk),
+     lalu browser membuka halaman tujuan. Halaman tujuan melanjutkan layar yang sama
+     (skrip kecil setelah <body>) dan memudar begitu siap. Tautan tetap <a href> biasa,
+     jadi tidak memengaruhi SEO; dilewati untuk tab baru, Ctrl/Cmd+klik, dan "kurangi animasi". */
+  var rl = document.getElementById("route-loader");
+  if (rl && rl.hasAttribute("data-mpa")) {
+    var rlPath = $(".rl-path", rl);
+    var rlClear = function () { rl.classList.remove("is-active", "is-resume", "is-done", "is-out"); };
+    // halaman tujuan: tutup layar transisi
+    if (rl.classList.contains("is-resume")) {
+      rl.classList.add("is-done");
+      setTimeout(function () { rl.classList.add("is-out"); setTimeout(rlClear, 360); }, 220);
+    }
+    // kembali lewat tombol Back (back/forward cache): pastikan layar tidak tertinggal
+    window.addEventListener("pageshow", function (e) { if (e.persisted) rlClear(); });
+
+    var isIndex = function (path) { return /(^|\/)(index\.html)?$/.test(path); };
+    var internalPage = function (a) {
+      if (!a || (a.target && a.target !== "_self") || a.hasAttribute("download")) return false;
+      var h = a.getAttribute("href") || "";
+      if (!h || h.charAt(0) === "#" || /^(mailto:|tel:|javascript:)/i.test(h)) return false;
+      if (a.origin !== location.origin || !/(\.html|\/)$/.test(a.pathname)) return false;
+      if (a.pathname === location.pathname || (isIndex(a.pathname) && isIndex(location.pathname))) return false;
+      return true;
+    };
+    // muat halaman tujuan lebih awal saat kursor/jari menyentuh tautan
+    var prefetched = {};
+    var prefetch = function (e) {
+      var a = e.target.closest && e.target.closest("a[href]");
+      if (!internalPage(a)) return;
+      var u = a.href.split("#")[0];
+      if (prefetched[u]) return;
+      prefetched[u] = 1;
+      var l = document.createElement("link"); l.rel = "prefetch"; l.href = u; document.head.appendChild(l);
+    };
+    document.addEventListener("pointerover", prefetch, { passive: true });
+    document.addEventListener("touchstart", prefetch, { passive: true });
+    document.addEventListener("focusin", prefetch);
+
+    document.addEventListener("click", function (e) {
+      if (reduceMotion || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      var a = e.target.closest && e.target.closest("a[href]");
+      if (!internalPage(a)) return;
+      e.preventDefault();
+      var x = e.detail ? e.clientX : window.innerWidth / 2, y = e.detail ? e.clientY : window.innerHeight / 2;
+      rl.style.setProperty("--cx", x + "px"); rl.style.setProperty("--cy", y + "px");
+      var stem = a.pathname.split("/").pop().replace(/\.html$/, "");
+      var path = "/" + (!stem || stem === "index" ? "beranda" : stem);
+      if (rlPath) rlPath.textContent = path;
+      rlClear(); void rl.offsetWidth; rl.classList.add("is-active");
+      try { sessionStorage.setItem("pkp-rl", JSON.stringify({ t: Date.now(), p: path })); } catch (err) {}
+      var href = a.href;
+      setTimeout(function () { location.href = href; }, 440);
+    });
+  }
 })();
