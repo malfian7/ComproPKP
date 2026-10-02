@@ -1,0 +1,418 @@
+/* PKP Company Profile — interaksi bersama untuk semua halaman */
+
+/* ===== KONFIGURASI FORM KONTAK =====
+   Pesan dari form "Hubungi Kami" dikirim lewat FormSubmit (https://formsubmit.co), layanan gratis
+   yang meneruskan isi form ke email tanpa perlu server/backend sendiri.
+   - endpoint : ganti alamat email di ujung URL untuk mengubah penerima.
+   - Setelah aktivasi, FormSubmit memberi alias acak (mis. .../ajax/a1b2c3...) — pakai alias itu
+     agar alamat email tidak terlihat di source code. */
+var PKP_CONTACT = {
+  endpoint: "https://formsubmit.co/ajax/alfian.ma18@gmail.com",
+  fallbackEmail: "alfian.ma18@gmail.com",   // dipakai tombol "kirim lewat aplikasi email" bila gagal
+  subjectPrefix: "Pesan baru dari website PKP"
+};
+
+(function () {
+  "use strict";
+  document.documentElement.classList.add("js");
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var $ = function (s, c) { return (c || document).querySelector(s); };
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+
+  /* ---------- Header solid + garis progres baca (di-throttle dengan rAF) ---------- */
+  var header = $(".site-header"), ticking = false, scrolled = null;
+  var progress = document.createElement("div");
+  progress.className = "scroll-progress"; progress.setAttribute("aria-hidden", "true");
+  document.body.appendChild(progress);
+  function updateProgress() {
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.transform = "scaleX(" + (max > 0 ? Math.min(1, window.scrollY / max) : 0) + ")";
+  }
+  function onScroll() {
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(function () {
+      var s = window.scrollY > 24;
+      if (header && s !== scrolled) { header.classList.toggle("is-scrolled", s); scrolled = s; }
+      updateProgress();
+      ticking = false;
+    });
+  }
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  /* ---------- Indikator menu aktif (garis kuning yang bergeser ke menu terpilih) ---------- */
+  var navMenu = $(".nav-menu"), indicator = null;
+  if (navMenu) {
+    indicator = document.createElement("li");
+    indicator.className = "nav-indicator no-anim"; indicator.setAttribute("aria-hidden", "true");
+    navMenu.appendChild(indicator); navMenu.classList.add("has-indicator");
+  }
+  function moveIndicator(instant) {
+    if (!indicator || !navMenu.offsetParent) return;           // menu tersembunyi (mobile)
+    var link = $('.nav-link[aria-current="page"]', navMenu);
+    if (instant) indicator.classList.add("no-anim");
+    if (link) {
+      var pad = parseFloat(getComputedStyle(link).paddingLeft) || 0;
+      indicator.style.setProperty("--x", (link.offsetLeft + pad) + "px");
+      indicator.style.setProperty("--w", (link.offsetWidth - pad * 2) + "px");
+      indicator.classList.add("is-on");
+    } else {
+      indicator.classList.remove("is-on");
+    }
+    if (instant) { void indicator.offsetWidth; indicator.classList.remove("no-anim"); }
+  }
+  moveIndicator(true);
+  window.addEventListener("resize", function () { moveIndicator(true); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { moveIndicator(true); });
+
+  /* ---------- Jeda animasi dekoratif saat di luar layar ---------- */
+  if ("IntersectionObserver" in window) {
+    var aio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { en.target.classList.toggle("is-offscreen", !en.isIntersecting); });
+    });
+    $$(".hero, .hero-visual, .kyc-stage").forEach(function (el) { aio.observe(el); });
+  }
+
+  /* ---------- Drawer mobile ---------- */
+  var drawer = $("#drawer"), burger = $(".burger");
+  if (drawer && burger) {
+    var panel = $(".drawer-panel", drawer);
+    var openDrawer = function () {
+      drawer.classList.add("is-open"); drawer.setAttribute("aria-hidden", "false");
+      burger.setAttribute("aria-expanded", "true"); document.body.classList.add("no-scroll");
+      setTimeout(function () { $(".drawer-close", drawer).focus(); }, 50);
+    };
+    var closeDrawer = function () {
+      drawer.classList.remove("is-open"); drawer.setAttribute("aria-hidden", "true");
+      burger.setAttribute("aria-expanded", "false"); document.body.classList.remove("no-scroll"); burger.focus();
+    };
+    burger.addEventListener("click", openDrawer);
+    $$("[data-close-drawer]", drawer).forEach(function (el) { el.addEventListener("click", closeDrawer); });
+    drawer.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeDrawer();
+      if (e.key === "Tab") { // focus trap
+        var f = $$("a, button, summary", panel).filter(function (el) { return el.offsetParent !== null; });
+        var first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
+    $$("a", drawer).forEach(function (a) { a.addEventListener("click", function () { if (a.getAttribute("href").charAt(0) === "#") closeDrawer(); }); });
+  }
+
+  /* ---------- Foto dummy: fallback jika gagal dimuat ---------- */
+  $$(".ph img, .photo-frame img, .post-thumb img, .article-cover img").forEach(function (img) {
+    var mark = function () { (img.closest(".ph, .photo-frame, .post-thumb, .article-cover") || img.parentNode).classList.add("is-missing"); img.style.display = "none"; };
+    if (img.complete && img.naturalWidth === 0) mark();
+    img.addEventListener("error", mark);
+  });
+
+  /* ---------- Scroll reveal ---------- */
+  var reveals = $$("[data-reveal]");
+  $$("[data-stagger]").forEach(function (group) {
+    $$(":scope > *", group).forEach(function (child, i) { child.setAttribute("data-reveal", ""); child.style.setProperty("--d", Math.min(i * 60, 480) + "ms"); reveals.push(child); });
+  });
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("is-visible"); io.unobserve(en.target); } });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    reveals.forEach(function (el) { io.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add("is-visible"); });
+  }
+
+  /* ---------- Counter angka ----------
+     Angka dihitung naik setiap kali bagiannya terlihat. Saat pindah halaman, hitungan
+     diulang dan baru dimulai setelah layar transisi selesai (agar tidak "hilang" di baliknya). */
+  var fmt = function (n) { return n.toLocaleString("id-ID"); };
+  var isYear = function (n) { return n >= 1900 && n <= 2100; };
+  var countRaf = typeof WeakMap === "function" ? new WeakMap() : null;
+  var loaderBusy = function () { var l = document.getElementById("route-loader"); return !!(l && l.classList.contains("is-active")); };
+  var countText = function (el, v) {
+    var target = parseFloat(el.getAttribute("data-count"));
+    el.textContent = (isYear(target) ? String(v) : fmt(v)) + (el.getAttribute("data-suffix") || "");
+  };
+  var runCounter = function (el) {
+    if (loaderBusy()) { setTimeout(function () { runCounter(el); }, 120); return; }
+    var target = parseFloat(el.getAttribute("data-count"));
+    if (reduceMotion) { countText(el, target); return; }
+    if (countRaf && countRaf.get(el)) cancelAnimationFrame(countRaf.get(el));
+    var start = null, dur = isYear(target) ? 1400 : 1200, from = isYear(target) ? target - 14 : 0;
+    var step = function (t) {
+      if (!start) start = t;
+      var p = Math.min((t - start) / dur, 1), eased = 1 - Math.pow(1 - p, 3);
+      countText(el, Math.round(from + (target - from) * eased));
+      if (p < 1 && countRaf) countRaf.set(el, requestAnimationFrame(step)); else if (p < 1) requestAnimationFrame(step);
+    };
+    if (countRaf) countRaf.set(el, requestAnimationFrame(step)); else requestAnimationFrame(step);
+  };
+  var cio = "IntersectionObserver" in window ? new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) { if (en.isIntersecting) { cio.unobserve(en.target); runCounter(en.target); } });
+  }, { threshold: 0.4 }) : null;
+  function armCounters(scope) {
+    $$("[data-count]", scope).forEach(function (el) {
+      var target = parseFloat(el.getAttribute("data-count"));
+      if (reduceMotion || !cio) { countText(el, target); return; }
+      if (countRaf && countRaf.get(el)) cancelAnimationFrame(countRaf.get(el));
+      countText(el, isYear(target) ? target - 14 : 0);   // mulai dari awal lagi
+      cio.unobserve(el); cio.observe(el);
+    });
+  }
+  armCounters(document);
+
+  /* ---------- Tabs generik (produk beranda) ---------- */
+  $$("[data-tabs]").forEach(function (root) {
+    var tabs = $$('[role="tab"]', root);
+    var select = function (tab, focus) {
+      tabs.forEach(function (t) {
+        var on = t === tab; t.setAttribute("aria-selected", on); t.tabIndex = on ? 0 : -1;
+        var panel = document.getElementById(t.getAttribute("aria-controls"));
+        if (panel) { panel.hidden = !on; if (on) { panel.classList.remove("is-entering"); void panel.offsetWidth; panel.classList.add("is-entering"); } }
+      });
+      if (focus) tab.focus();
+    };
+    tabs.forEach(function (t, i) {
+      t.addEventListener("click", function () { select(t); });
+      t.addEventListener("keydown", function (e) {
+        var dir = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
+        if (dir) { e.preventDefault(); select(tabs[(i + dir + tabs.length) % tabs.length], true); }
+        if (e.key === "Home") { e.preventDefault(); select(tabs[0], true); }
+        if (e.key === "End") { e.preventDefault(); select(tabs[tabs.length - 1], true); }
+      });
+    });
+  });
+
+  /* ---------- Core value SEJAHTERA ---------- */
+  var vw = $("[data-values]");
+  if (vw) {
+    var btns = $$("button", vw), detail = $("#value-detail");
+    var show = function (b, focus) {
+      btns.forEach(function (x) { var on = x === b; x.setAttribute("aria-selected", on); x.tabIndex = on ? 0 : -1; });
+      $(".big", detail).textContent = b.textContent.trim();
+      $("h3", detail).textContent = b.getAttribute("data-name");
+      $("p", detail).textContent = b.getAttribute("data-desc");
+      detail.classList.remove("is-swapping"); void detail.offsetWidth; detail.classList.add("is-swapping");
+      if (focus) b.focus();
+    };
+    btns.forEach(function (b, i) {
+      b.addEventListener("click", function () { show(b); });
+      b.addEventListener("mouseenter", function () { show(b); });
+      b.addEventListener("keydown", function (e) {
+        var dir = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+        if (dir) { e.preventDefault(); show(btns[(i + dir + btns.length) % btns.length], true); }
+      });
+    });
+  }
+
+  /* ---------- Blog: filter + load more ---------- */
+  var postGrid = $("[data-posts]");
+  if (postGrid) {
+    var posts = $$(".post-card", postGrid), filterBtns = $$("[data-filter]"), moreBtn = $("[data-load-more]");
+    var perPage = parseInt(postGrid.getAttribute("data-per-page"), 10) || 9, shown = perPage, current = "all";
+    var empty = $(".empty-state");
+    var render = function (animateFrom) {
+      var matches = posts.filter(function (p) { return current === "all" || p.getAttribute("data-cat") === current; });
+      posts.forEach(function (p) { p.hidden = true; p.classList.remove("is-in"); });
+      matches.forEach(function (p, i) {
+        if (i < shown) { p.hidden = false; if (animateFrom !== undefined && i >= animateFrom) { p.style.animationDelay = (i - animateFrom) * 60 + "ms"; p.classList.add("is-in"); } }
+      });
+      if (moreBtn) moreBtn.parentNode.hidden = matches.length <= shown;
+      if (empty) empty.classList.toggle("is-visible", matches.length === 0);
+    };
+    filterBtns.forEach(function (b) {
+      b.addEventListener("click", function () {
+        filterBtns.forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+        current = b.getAttribute("data-filter"); shown = perPage; render(0);
+      });
+    });
+    if (moreBtn) moreBtn.addEventListener("click", function () {
+      var from = shown; shown += 3;
+      moreBtn.classList.add("is-loading");
+      setTimeout(function () { moreBtn.classList.remove("is-loading"); render(from); }, reduceMotion ? 0 : 450);
+    });
+    render();
+  }
+
+  /* ---------- Karir: filter lowongan ---------- */
+  var jobSelect = $("#job-filter");
+  if (jobSelect) {
+    var jobs = $$(".job"), jobCount = $("#job-count");
+    var applyJobs = function () {
+      var v = jobSelect.value, n = 0;
+      jobs.forEach(function (j) { var on = v === "all" || j.getAttribute("data-dept") === v; j.hidden = !on; if (on) n++; });
+      if (jobCount) jobCount.textContent = n + " posisi terbuka";
+    };
+    jobSelect.addEventListener("change", applyJobs); applyJobs();
+  }
+
+  /* ---------- Sub-nav aktif (halaman produk) ----------
+     Catatan: tidak memakai scrollIntoView() karena ikut menggeser halaman
+     secara vertikal dan "melawan" scroll pengguna (penyebab efek glitch). */
+  var subLinks = $$(".subnav a"), subList = $(".subnav ul");
+  if (subLinks.length && "IntersectionObserver" in window) {
+    var map = {}, activeLink = null;
+    subLinks.forEach(function (a) { var s = document.getElementById(a.getAttribute("href").slice(1)); if (s) map[s.id] = a; });
+    var setActive = function (a) {
+      if (!a || a === activeLink) return;
+      if (activeLink) { activeLink.classList.remove("is-active"); activeLink.removeAttribute("aria-current"); }
+      a.classList.add("is-active"); a.setAttribute("aria-current", "true"); activeLink = a;
+      // geser daftar sub-nav secara horizontal saja
+      if (subList && subList.scrollWidth > subList.clientWidth) {
+        var left = a.offsetLeft - (subList.clientWidth - a.offsetWidth) / 2;
+        subList.scrollTo({ left: Math.max(0, left), behavior: reduceMotion ? "auto" : "smooth" });
+      }
+    };
+    var sio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) setActive(map[en.target.id]); });
+    }, { rootMargin: "-40% 0px -55% 0px" });
+    Object.keys(map).forEach(function (id) { sio.observe(document.getElementById(id)); });
+  }
+
+  /* ---------- Form kontak: validasi inline ---------- */
+  var form = $("#contact-form");
+  if (form) {
+    var rules = {
+      nama: function (v) { return v.trim().length >= 2 || "Tulis nama lengkap Anda."; },
+      email: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) || "Masukkan alamat email yang valid, contoh: nama@perusahaan.co.id."; },
+      telepon: function (v) { return v.trim() === "" || /^[0-9+\-\s()]{8,}$/.test(v.trim()) || "Nomor telepon minimal 8 digit angka."; },
+      kebutuhan: function (v) { return v !== "" || "Pilih salah satu kebutuhan."; },
+      pesan: function (v) { return v.trim().length >= 10 || "Ceritakan kebutuhan Anda minimal 10 karakter."; }
+    };
+    var validate = function (input) {
+      var rule = rules[input.name]; if (!rule) return true;
+      var res = rule(input.value), field = input.closest(".field"), err = $(".field-error", field);
+      var ok = res === true;
+      field.classList.toggle("has-error", !ok); input.setAttribute("aria-invalid", String(!ok));
+      if (err) err.textContent = ok ? "" : res;
+      return ok;
+    };
+    $$(".field input, .field select, .field textarea", form).forEach(function (el) {
+      el.addEventListener("blur", function () { if (el.value !== "" || el.closest(".field").classList.contains("has-error")) validate(el); });
+      el.addEventListener("input", function () { if (el.closest(".field").classList.contains("has-error")) validate(el); });
+    });
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var invalid = $$(".field input, .field select, .field textarea", form).filter(function (el) { return !validate(el); });
+      if (invalid.length) { invalid[0].focus(); return; }
+      var btn = $("button[type=submit]", form), label = $(".lbl", btn), alertBox = $("#form-alert");
+      var setBusy = function (busy) {
+        btn.classList.toggle("is-loading", busy); btn.disabled = busy;
+        label.textContent = busy ? "Mengirim…" : "Kirim pesan";
+        $("use", btn).setAttribute("href", busy ? "#i-loader" : "#i-send");
+      };
+      var showSuccess = function () {
+        setBusy(false); form.hidden = true; if (alertBox) alertBox.hidden = true;
+        var ok = $("#form-success"); ok.classList.add("is-visible"); ok.setAttribute("tabindex", "-1"); ok.focus();
+      };
+      // Honeypot terisi = bot: pura-pura berhasil tanpa mengirim apa pun
+      if (form.elements._honey && form.elements._honey.value) { showSuccess(); return; }
+
+      var f = form.elements, kebText = f.kebutuhan.options[f.kebutuhan.selectedIndex].text;
+      var data = {
+        "Nama": f.nama.value.trim(),
+        "Perusahaan": f.perusahaan.value.trim() || "-",
+        "Email": f.email.value.trim(),
+        "Telepon": f.telepon.value.trim() || "-",
+        "Kebutuhan": kebText,
+        "Pesan": f.pesan.value.trim(),
+        "Dikirim dari": location.href.split("#")[0] || "website PKP",
+        _subject: PKP_CONTACT.subjectPrefix + " — " + kebText,
+        _replyto: f.email.value.trim(),
+        _template: "table",
+        _captcha: "false"
+      };
+      var mailtoHref = "mailto:" + PKP_CONTACT.fallbackEmail + "?subject=" + encodeURIComponent(data._subject) +
+        "&body=" + encodeURIComponent(["Nama: " + data.Nama, "Perusahaan: " + data.Perusahaan, "Email: " + data.Email,
+          "Telepon: " + data.Telepon, "Kebutuhan: " + kebText, "", data.Pesan].join("\n"));
+      var showError = function (title, detail) {
+        setBusy(false);
+        if (!alertBox) return;
+        alertBox.innerHTML = "<strong></strong><span></span><a>Kirim lewat aplikasi email</a>";
+        alertBox.querySelector("strong").textContent = title;
+        alertBox.querySelector("span").textContent = detail;
+        alertBox.querySelector("a").setAttribute("href", mailtoHref);
+        alertBox.hidden = false; alertBox.setAttribute("tabindex", "-1"); alertBox.focus();
+      };
+
+      if (alertBox) alertBox.hidden = true;
+      setBusy(true);
+      var ctrl = window.AbortController ? new AbortController() : null;
+      var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 15000);
+      fetch(PKP_CONTACT.endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(data),
+        signal: ctrl ? ctrl.signal : undefined
+      }).then(function (res) {
+        return res.json().catch(function () { return { success: res.ok }; });
+      }).then(function (res) {
+        clearTimeout(timer);
+        if (res && (res.success === true || res.success === "true")) { showSuccess(); return; }
+        var msg = (res && res.message) || "";
+        if (/activat/i.test(msg)) {
+          showError("Formulir belum diaktifkan.", "Pemilik website perlu mengeklik tautan aktivasi yang dikirim FormSubmit ke email penerima, lalu kirim ulang pesan ini.");
+        } else {
+          showError("Pesan belum terkirim.", (msg ? msg + ". " : "") + "Coba kirim ulang beberapa saat lagi.");
+        }
+      }).catch(function () {
+        clearTimeout(timer);
+        showError("Pesan belum terkirim.", "Koneksi internet terputus atau layanan pengiriman tidak dapat dijangkau. Periksa koneksi lalu coba lagi.");
+      });
+    });
+    var again = $("#form-again");
+    if (again) again.addEventListener("click", function () {
+      form.reset(); form.hidden = false; $("#form-success").classList.remove("is-visible");
+      var btn = $("button[type=submit]", form); btn.classList.remove("is-loading"); btn.disabled = false; $(".lbl", btn).textContent = "Kirim pesan"; $("use", btn).setAttribute("href", "#i-send");
+      $("input", form).focus();
+    });
+  }
+
+  /* ---------- Prefill form dari URL (?kebutuhan=... / ?produk=...) ---------- */
+  var sel = $("#f-kebutuhan");
+  if (sel && window.URLSearchParams) {
+    var qs = new URLSearchParams(location.search), keb = qs.get("kebutuhan"), prod = qs.get("produk");
+    if (keb && $('option[value="' + keb + '"]', sel)) sel.value = keb;
+    if (prod) {
+      sel.value = "produk";
+      var names = { klinikcare: "KlinikCare", beezap: "BeeZap (WhatsApp Business)" };
+      var msg = $("#f-pesan"); if (msg && !msg.value) msg.value = "Saya tertarik dengan " + (names[prod] || prod) + ". Mohon info demo dan penawarannya.";
+    }
+  }
+
+  /* ---------- Salin tautan artikel ---------- */
+  $$("[data-copy-link]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var done = function () { var t = b.getAttribute("aria-label"); b.setAttribute("aria-label", "Tautan disalin"); $("use", b).setAttribute("href", "#i-check"); setTimeout(function () { b.setAttribute("aria-label", t); $("use", b).setAttribute("href", "#i-link"); }, 1800); };
+      if (navigator.clipboard) navigator.clipboard.writeText(location.href).then(done, done); else done();
+    });
+  });
+
+  /* ---------- Efek pointer (hanya perangkat dengan mouse, dilewati bila "kurangi animasi") ---------- */
+  var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (finePointer && !reduceMotion) {
+    // 1) Mockup perangkat produk sedikit miring mengikuti kursor (3D tilt)
+    $$(".showcase-media--shot, .showcase-media--frame").forEach(function (el) {
+      var raf = null;
+      el.addEventListener("pointermove", function (e) {
+        if (raf) return;
+        raf = requestAnimationFrame(function () {
+          var r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+          el.style.setProperty("--ry", (x * 7).toFixed(2) + "deg"); el.style.setProperty("--rx", (-y * 6).toFixed(2) + "deg");
+          el.classList.add("is-tilting"); raf = null;
+        });
+      });
+      el.addEventListener("pointerleave", function () { el.classList.remove("is-tilting"); el.style.removeProperty("--rx"); el.style.removeProperty("--ry"); });
+    });
+    // 2) Sorotan cahaya yang mengikuti kursor pada kartu-kartu gelap
+    var spotSel = ".ps-list a, .infra-item, .industry-card, .app-card, .svc-card, .benefit";
+    document.addEventListener("pointermove", function (e) {
+      var el = e.target.closest && e.target.closest(spotSel);
+      if (!el) return;
+      var r = el.getBoundingClientRect();
+      el.style.setProperty("--mx", (e.clientX - r.left) + "px"); el.style.setProperty("--my", (e.clientY - r.top) + "px");
+    }, { passive: true });
+  }
+
+  /* ---------- Tahun footer ---------- */
+  $$("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
+})();
