@@ -1,0 +1,342 @@
+{
+ "fifgroup": {
+  "name": "FIFGROUP",
+  "w": 113,
+  "h": 38,
+  "src_px": [
+   182,
+   61
+  ],
+  "bytes": 4444
+ },
+ "simgroup": {
+  "name": "SIMGROUP",
+  "w": 80,
+  "h": 50,
+  "src_px": [
+   128,
+   80
+  ],
+  "bytes": 5998
+ },
+ "sehati": {
+  "name": "Sehati",
+  "w": 116,
+  "h": 37,
+  "src_px": [
+   186,
+   59
+  ],
+  "bytes": 5748
+ },
+ "dika": {
+  "name": "Dika Sinar Sejahtera",
+  "w": 60,
+  "h": 50,
+  "src_px": [
+   96,
+   80
+  ],
+  "bytes": 5746
+ },
+ "morena": {
+  "name": "Morena Rent",
+  "w": 97,
+  "h": 45,
+  "src_px": [
+   156,
+   72
+  ],
+  "bytes": 5188
+ },
+ "indomobil": {
+  "name": "Indomobil Finance",
+  "w": 95,
+  "h": 45,
+  "src_px": [
+   151,
+   72
+  ],
+  "bytes": 10824
+ },
+ "astrapay": {
+  "name": "AstraPay",
+  "w": 133,
+  "h": 32,
+  "src_px": [
+   210,
+   51
+  ],
+  "bytes": 5768
+ },
+ "nusaprima": {
+  "name": "Nusa Prima Motor",
+  "w": 121,
+  "h": 36,
+  "src_px": [
+   197,
+   58
+  ],
+  "bytes": 7626
+ },
+ "nusaperkasa": {
+  "name": "Nusa Perkasa Makmur",
+  "w": 99,
+  "h": 44,
+  "src_px": [
+   158,
+   70
+  ],
+  "bytes": 5584
+ },
+ "kspmas": {
+  "name": "KSP MAS",
+  "w": 117,
+  "h": 37,
+  "src_px": [
+   189,
+   59
+  ],
+  "bytes": 4496
+ },
+ "sinarmentari": {
+  "name": "Sinar Mentari Makmur",
+  "w": 54,
+  "h": 50,
+  "src_px": [
+   86,
+   80
+  ],
+  "bytes": 8262
+ },
+ "dayakaruniamakmur": {
+  "name": "Daya Karunia Makmur",
+  "w": 132,
+  "h": 33,
+  "src_px": [
+   215,
+   53
+  ],
+  "bytes": 5546
+ },
+ "dayakaruniamandiri": {
+  "name": "Daya Karunia Mandiri",
+  "w": 140,
+  "h": 23,
+  "src_px": [
+   225,
+   37
+  ],
+  "bytes": 5088
+ },
+ "apjapi": {
+  "name": "APJAPI",
+  "w": 132,
+  "h": 33,
+  "src_px": [
+   214,
+   53
+  ],
+  "bytes": 6396
+ },
+ "ska": {
+  "name": "SKA",
+  "w": 56,
+  "h": 50,
+  "src_px": [
+   89,
+   80
+  ],
+  "bytes": 4540
+ },
+ "bintangindah": {
+  "name": "Bintang Indah Gemerlap",
+  "w": 51,
+  "h": 50,
+  "src_px": [
+   81,
+   80
+  ],
+  "bytes": 3526
+ },
+ "pengenumroh": {
+  "name": "Pengen Umroh",
+  "w": 132,
+  "h": 33,
+  "src_px": [
+   214,
+   53
+  ],
+  "bytes": 5692
+ },
+ "mncfinance": {
+  "name": "MNC Finance",
+  "w": 127,
+  "h": 34,
+  "src_px": [
+   204,
+   54
+  ],
+  "bytes": 5676
+ },
+ "kas": {
+  "name": "KAS",
+  "w": 71,
+  "h": 50,
+  "src_px": [
+   114,
+   80
+  ],
+  "bytes": 6954
+ },
+ "cma": {
+  "name": "CMA",
+  "w": 105,
+  "h": 41,
+  "src_px": [
+   169,
+   66
+  ],
+  "bytes": 7812
+ },
+ "mncguna": {
+  "name": "MNC Guna Usaha Indonesia",
+  "w": 128,
+  "h": 34,
+  "src_px": [
+   205,
+   54
+  ],
+  "bytes": 8618
+ },
+ "ima": {
+  "name": "Indonesia Marketing Association",
+  "w": 95,
+  "h": 45,
+  "src_px": [
+   151,
+   72
+  ],
+  "bytes": 6130
+ },
+ "megacapital": {
+  "name": "Mega Capital Sekuritas",
+  "w": 81,
+  "h": 50,
+  "src_px": [
+   130,
+   80
+  ],
+  "bytes": 5398
+ },
+ "mcf": {
+  "name": "MCF",
+  "w": 137,
+  "h": 31,
+  "src_px": [
+   218,
+   50
+  ],
+  "bytes": 5070
+ },
+ "kiss": {
+  "name": "Kiss",
+  "w": 46,
+  "h": 50,
+  "src_px": [
+   73,
+   80
+  ],
+  "bytes": 4660
+ },
+ "sehatisyariah": {
+  "name": "Koperasi Sehati Syariah",
+  "w": 106,
+  "h": 41,
+  "src_px": [
+   173,
+   66
+  ],
+  "bytes": 6770
+ },
+ "woori": {
+  "name": "Woori Finance Indonesia",
+  "w": 140,
+  "h": 25,
+  "src_px": [
+   223,
+   40
+  ],
+  "bytes": 6508
+ },
+ "big": {
+  "name": "BIG",
+  "w": 50,
+  "h": 50,
+  "src_px": [
+   80,
+   80
+  ],
+  "bytes": 3962
+ },
+ "prime": {
+  "name": "Prime Travelindo",
+  "w": 113,
+  "h": 38,
+  "src_px": [
+   182,
+   61
+  ],
+  "bytes": 7666
+ },
+ "tobadihon": {
+  "name": "Tobadihon Mandiri",
+  "w": 54,
+  "h": 50,
+  "src_px": [
+   87,
+   80
+  ],
+  "bytes": 2094
+ },
+ "kusuma8": {
+  "name": "Kusuma 8",
+  "w": 60,
+  "h": 50,
+  "src_px": [
+   96,
+   80
+  ],
+  "bytes": 5494
+ },
+ "petra": {
+  "name": "Petra Sukses Utama",
+  "w": 90,
+  "h": 48,
+  "src_px": [
+   145,
+   77
+  ],
+  "bytes": 5372
+ },
+ "bintangorbit": {
+  "name": "Bintang Orbit Semesta",
+  "w": 89,
+  "h": 48,
+  "src_px": [
+   141,
+   77
+  ],
+  "bytes": 5654
+ },
+ "ganesha": {
+  "name": "Ganesha Bina Utama",
+  "w": 107,
+  "h": 40,
+  "src_px": [
+   172,
+   64
+  ],
+  "bytes": 6894
+ }
+}

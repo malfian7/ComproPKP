@@ -1,0 +1,172 @@
+{
+ "telkom": {
+  "name": "Telkom Indonesia",
+  "w": 90,
+  "h": 48,
+  "src_px": [
+   180,
+   96
+  ],
+  "bytes": 5902
+ },
+ "telkomsigma": {
+  "name": "Telkomsigma",
+  "w": 126,
+  "h": 34,
+  "src_px": [
+   250,
+   68
+  ],
+  "bytes": 8052
+ },
+ "finnet": {
+  "name": "Finnet",
+  "w": 98,
+  "h": 44,
+  "src_px": [
+   197,
+   88
+  ],
+  "bytes": 6306
+ },
+ "xl": {
+  "name": "XL Axiata",
+  "w": 93,
+  "h": 46,
+  "src_px": [
+   184,
+   92
+  ],
+  "bytes": 7224
+ },
+ "hpe": {
+  "name": "Hewlett Packard Enterprise",
+  "w": 101,
+  "h": 42,
+  "src_px": [
+   182,
+   76
+  ],
+  "bytes": 2774
+ },
+ "veeam": {
+  "name": "Veeam",
+  "w": 118,
+  "h": 36,
+  "src_px": [
+   194,
+   60
+  ],
+  "bytes": 2194
+ },
+ "indosat": {
+  "name": "Indosat Ooredoo",
+  "w": 89,
+  "h": 48,
+  "src_px": [
+   100,
+   54
+  ],
+  "bytes": 3704
+ },
+ "eset": {
+  "name": "ESET",
+  "w": 104,
+  "h": 41,
+  "src_px": [
+   207,
+   82
+  ],
+  "bytes": 6310
+ },
+ "smartfren": {
+  "name": "Smartfren",
+  "w": 103,
+  "h": 42,
+  "src_px": [
+   206,
+   84
+  ],
+  "bytes": 1570
+ },
+ "1engage": {
+  "name": "1Engage",
+  "w": 140,
+  "h": 30,
+  "src_px": [
+   236,
+   51
+  ],
+  "bytes": 2070
+ },
+ "tencent": {
+  "name": "Tencent Cloud",
+  "w": 140,
+  "h": 22,
+  "src_px": [
+   251,
+   39
+  ],
+  "bytes": 5284
+ },
+ "biznet": {
+  "name": "Biznet",
+  "w": 114,
+  "h": 38,
+  "src_px": [
+   230,
+   76
+  ],
+  "bytes": 6116
+ },
+ "faspay": {
+  "name": "Faspay",
+  "w": 112,
+  "h": 38,
+  "src_px": [
+   222,
+   76
+  ],
+  "bytes": 6102
+ },
+ "tri": {
+  "name": "Tri",
+  "w": 40,
+  "h": 50,
+  "src_px": [
+   80,
+   100
+  ],
+  "bytes": 4782
+ },
+ "pactindo": {
+  "name": "Sarana Pactindo",
+  "w": 79,
+  "h": 50,
+  "src_px": [
+   158,
+   100
+  ],
+  "bytes": 9998
+ },
+ "doitpay": {
+  "name": "Doitpay",
+  "w": 109,
+  "h": 39,
+  "src_px": [
+   216,
+   78
+  ],
+  "bytes": 6306
+ },
+ "dpscloud": {
+  "name": "DPS Cloud",
+  "w": 81,
+  "h": 50,
+  "src_px": [
+   162,
+   100
+  ],
+  "bytes": 5024
+ }
+}
