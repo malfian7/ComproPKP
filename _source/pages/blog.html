@@ -1,0 +1,22 @@
+<!-- title=Media & Informasi|desc=Artikel dan insight seputar industri keuangan, teknologi, dan transformasi digital, juga kabar produk terbaru dari PT Prawathiya Karsa Pradiptha.|nav=blog|seo=Media & Informasi — Artikel Teknologi dan Insight | PKP -->
+<section class="page-hero">
+  <div class="container">
+    <nav aria-label="Breadcrumb"><ol class="breadcrumb"><li><a href="index.html">Beranda</a></li><li aria-current="page">Media &amp; Informasi</li></ol></nav>
+    <h1 class="page-title">Media &amp; Informasi</h1>
+    <p class="page-lead">Kumpulan artikel, wawasan industri, dan agenda kegiatan terbaru dari PT Prawathiya Karsa Pradiptha.</p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="posts-title" style="padding-top:clamp(2rem,1.5rem + 2vw,3rem)">
+  <div class="container">
+    <div class="filters" role="group" aria-label="Filter kategori" data-cms="blog-filters">
+      <button class="filter-chip" type="button" data-filter="all" aria-pressed="true">Semua</button>
+      <button class="filter-chip" type="button" data-filter="product" aria-pressed="false">Product</button>
+      <button class="filter-chip" type="button" data-filter="insight" aria-pressed="false">Insight</button>
+    </div>
+    <h2 class="sr-only" id="posts-title">Daftar artikel</h2>
+    <div class="post-grid" data-cms="blog-posts" data-posts data-per-page="9" aria-live="polite">{{gen:posts:12}}</div>
+    <div class="empty-state"><p>Belum ada artikel di kategori ini. Pilih kategori lain atau kembali ke <button class="link-arrow" type="button" data-filter="all" style="display:inline-flex;min-height:auto">Semua</button>.</p></div>
+    <div class="load-more-wrap"><button class="btn btn--primary" type="button" data-load-more><span>Load More</span>{{i:refresh}}</button></div>
+  </div>
+</section>

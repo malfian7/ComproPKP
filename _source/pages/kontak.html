@@ -1,0 +1,69 @@
+<!-- title=Hubungi Kami|desc=Hubungi PKP untuk konsultasi produk, layanan IT, kemitraan, training, dan karir. Kantor: Kawasan Niaga Citra Gran, Cibubur. Telp: (021) 84311636.|nav=kontak|cta=no|seo=Hubungi Kami — Konsultasi Solusi IT dengan PKP -->
+<section class="page-hero">
+  <div class="container">
+    <nav aria-label="Breadcrumb"><ol class="breadcrumb"><li><a href="index.html">Beranda</a></li><li aria-current="page">Hubungi Kami</li></ol></nav>
+    <h1 class="page-title">Hubungi Kami</h1>
+    <p class="page-lead">Ceritakan kebutuhan Anda — tim kami akan menghubungi kembali dalam 1×24 jam kerja.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container contact-layout">
+    <div class="card" data-reveal>
+      <h2 style="font-size:var(--fs-h4)">Kirim pesan</h2>
+      <p style="margin:6px 0 28px;color:var(--ink-3);font-size:var(--fs-sm)">Kolom bertanda wajib diisi kecuali ditandai opsional.</p>
+      <form id="contact-form" data-cms="contact-form" novalidate>
+        <div class="form-grid">
+          <div class="field"><label for="f-nama">Nama lengkap</label><input class="input" id="f-nama" name="nama" type="text" autocomplete="name" required aria-describedby="e-nama"><span class="field-error" id="e-nama" role="alert"></span></div>
+          <div class="field"><label for="f-perusahaan">Perusahaan <span class="opt">(opsional)</span></label><input class="input" id="f-perusahaan" name="perusahaan" type="text" autocomplete="organization"></div>
+          <div class="field"><label for="f-email">Email kerja</label><input class="input" id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="e-email"><span class="field-error" id="e-email" role="alert"></span></div>
+          <div class="field"><label for="f-telepon">Nomor telepon <span class="opt">(opsional)</span></label><input class="input" id="f-telepon" name="telepon" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="e-telepon"><span class="field-error" id="e-telepon" role="alert"></span></div>
+          <div class="field field--full"><label for="f-kebutuhan">Kebutuhan</label>
+            <select class="select" id="f-kebutuhan" name="kebutuhan" required aria-describedby="e-kebutuhan">
+              <option value="">Pilih kebutuhan Anda</option>
+              <option value="produk">Konsultasi produk (Fincore, iColls, ERP, dll.)</option>
+              <option value="layanan">Layanan IT (Professional / Managed / Integrasi)</option>
+              <option value="infrastruktur">Infrastruktur &amp; jaringan</option>
+              <option value="kemitraan">Kemitraan</option>
+              <option value="training">Training</option>
+              <option value="karir">Karir / kirim CV</option>
+              <option value="lainnya">Lainnya</option>
+            </select><span class="field-error" id="e-kebutuhan" role="alert"></span></div>
+          <div class="field field--full"><label for="f-pesan">Pesan</label><textarea class="textarea" id="f-pesan" name="pesan" required aria-describedby="h-pesan e-pesan"></textarea><span class="field-hint" id="h-pesan">Contoh: jumlah pengguna, sistem yang dipakai saat ini, dan target waktu implementasi.</span><span class="field-error" id="e-pesan" role="alert"></span></div>
+        </div>
+        <!-- Honeypot anti-spam: dibiarkan kosong oleh manusia, biasanya diisi bot -->
+        <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="form-alert" id="form-alert" role="alert" hidden></div>
+        <div class="form-foot">
+          <small>Dengan mengirim formulir ini, Anda setuju data dipakai untuk menindaklanjuti permintaan Anda.</small>
+          <button class="btn btn--primary" type="submit"><span class="lbl">Kirim pesan</span><svg class="icon" aria-hidden="true"><use href="#i-send"/></svg></button>
+        </div>
+      </form>
+      <div class="form-success" id="form-success" role="status">
+        <span class="ok">{{i:check}}</span>
+        <h3>Pesan terkirim</h3>
+        <p>Terima kasih. Tim kami akan menghubungi Anda dalam 1×24 jam kerja.</p>
+        <button class="btn btn--outline" type="button" id="form-again" style="margin-top:22px">Kirim pesan lain</button>
+      </div>
+    </div>
+
+    <aside data-reveal style="--d:80ms">
+      <div class="info-card">
+        <h2>Kantor PKP</h2>
+        <ul class="contact-list" data-cms="contact-info">
+          <li><span class="ci">{{i:map-pin}}</span><span>Kawasan Niaga Citra Gran. Blok R7 No. 32, Jl. Alternatif Transyogi, Cibubur 17433</span></li>
+          <li><span class="ci">{{i:phone}}</span><a href="tel:+622184311636">(021) 84311636</a></li>
+          <li><span class="ci">{{i:mail}}</span><a href="mailto:marketing@pkp.co.id">marketing@pkp.co.id</a></li>
+          <li><span class="ci">{{i:instagram}}</span><a href="https://www.instagram.com/beyondtechid" target="_blank" rel="noopener">@beyondtechid<span class="sr-only"> di Instagram (membuka tab baru)</span></a></li>
+        </ul>
+        <div class="hours" data-cms="contact-hours">
+          <div><span>Senin – Jumat</span><b>08.30 – 17.30</b></div>
+          <div><span>Sabtu – Minggu</span><b>Tutup</b></div>
+        </div>
+      </div>
+      <div class="map-frame">
+        <iframe data-cms="contact-map" title="Peta lokasi kantor PKP di Cibubur" src="https://maps.google.com/maps?q=Kawasan%20Niaga%20Citra%20Gran%20Cibubur&amp;z=15&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </aside>
+  </div>
+</section>
