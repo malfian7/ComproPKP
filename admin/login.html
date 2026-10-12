@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Masuk — PKP SuperAdmin</title>
+<link rel="icon" href="assets/logogram.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/admin.css">
+</head>
+<body>
+<main class="auth">
+  <section class="auth-form">
+    <div class="auth-card">
+      <div class="brand"><img src="assets/logogram.svg" alt=""><div><b>PKP SuperAdmin</b><small>PT. Prawathiya Karsa Pradiptha</small></div></div>
+      <div data-view></div>
+    </div>
+  </section>
+  <aside class="auth-side" aria-hidden="true">
+    <div class="auth-visual">
+      <span class="ringmark"></span>
+      <div class="auth-mock">
+        <div class="bar"><i></i><i></i><i></i></div>
+        <div class="row-m"><span class="item-icon" data-ic="box"></span><span class="t"><b>Beyond Fincore +</b><small>Produk · diperbarui</small></span><span class="badge badge--live">Tampil</span></div>
+        <div class="row-m"><span class="item-icon" data-ic="news"></span><span class="t"><b>Artikel: Core finance modular</b><small>Blog · siap tayang</small></span><span class="badge badge--draft">Draf</span></div>
+        <div class="row-m"><span class="item-icon" data-ic="inbox"></span><span class="t"><b>2 pesan baru</b><small>Form Hubungi Kami</small></span><span class="badge badge--new">Baru</span></div>
+      </div>
+      <div class="auth-caption"><b>Satu tempat untuk menjaga website PKP tetap terkini.</b><p>Ubah produk, layanan, partner, artikel, dan kontak — pratinjau dengan tampilan asli website, lalu publikasikan saat siap.</p></div>
+    </div>
+  </aside>
+</main>
+<script src="assets/core.js"></script>
+<script src="assets/ui.js"></script>
+<script>
+(function () {
+  var A = PKPAdmin, ui = A.ui, icon = ui.icon, view = document.querySelector("[data-view]"), q = new URLSearchParams(location.search);
+  document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("[data-ic]").forEach(function (s) { s.innerHTML = icon(s.dataset.ic); });
+  });
+  var pw = function (id, label, auto) {
+    return '<div class="field"><label for="' + id + '">' + label + '</label><div class="pw"><input class="input" id="' + id + '" name="' + id + '" type="password" autocomplete="' + auto + '" required>' +
+      '<button type="button" data-eye="' + id + '" aria-label="Tampilkan kata sandi">' + icon("eye", "icon--sm") + "</button></div></div>";
+  };
+  var bindEyes = function () {
+    view.querySelectorAll("[data-eye]").forEach(function (b) { b.onclick = function () {
+      var i = document.getElementById(b.dataset.eye), show = i.type === "password"; i.type = show ? "text" : "password";
+      b.setAttribute("aria-label", show ? "Sembunyikan kata sandi" : "Tampilkan kata sandi"); b.innerHTML = icon(show ? "eyeoff" : "eye", "icon--sm");
+    }; });
+  };
+  var err = function (msg) { var e = view.querySelector("[data-err]"); e.innerHTML = msg ? '<div class="callout callout--bad">' + icon("alert") + "<div>" + A.u.esc(msg) + "</div></div>" : ""; };
+  function login(demo) {
+    view.innerHTML = "<h1>Masuk</h1><p>Kelola konten website company profile PKP.</p>" +
+      (q.get("expired") ? '<div class="callout callout--warn" style="margin-bottom:16px">' + icon("clock") + "<div>Sesi berakhir. Silakan masuk kembali.</div></div>" : "") +
+      (demo ? '<div class="callout callout--info" style="margin-bottom:18px">' + icon("info") + '<div><b>Mode demo</b>PHP tidak terdeteksi. Masuk dengan <span class="mono">superadmin@pkp.co.id</span> / <span class="mono">demo12345</span>. <button type="button" class="btn btn--secondary btn--xs" data-fill style="margin-top:6px">Isi otomatis</button></div></div>' : "") +
+      '<form class="form" novalidate><div class="field"><label for="email">Email</label><input class="input" id="email" type="email" autocomplete="username" required></div>' + pw("password", "Kata sandi", "current-password") +
+      '<div data-err></div><button type="submit" class="btn btn--primary">Masuk</button></form>' +
+      '<p class="hint" style="margin-top:24px">Lupa kata sandi? Minta SuperAdmin lain mengatur ulang dari menu Pengguna.</p>';
+    bindEyes();
+    var f = view.querySelector("form");
+    var fill = view.querySelector("[data-fill]"); if (fill) fill.onclick = function () { f.email.value = "superadmin@pkp.co.id"; f.password.value = "demo12345"; f.querySelector("button[type=submit]").focus(); };
+    f.onsubmit = function (e) {
+      e.preventDefault(); err("");
+      var b = f.querySelector("button[type=submit]"); b.classList.add("is-busy"); b.textContent = "Memeriksa…";
+      A.api.call("login", { email: f.email.value, password: f.password.value }).then(function () { location.replace("index.html"); },
+        function (x) { b.classList.remove("is-busy"); b.textContent = "Masuk"; err(x.message); f.password.select(); });
+    };
+    setTimeout(function () { f.email.focus(); }, 50);
+  }
+  function setup() {
+    view.innerHTML = "<h1>Buat akun SuperAdmin</h1><p>Belum ada admin. Akun pertama otomatis menjadi SuperAdmin dan dapat menambah admin lain.</p>" +
+      '<form class="form" novalidate><div class="field"><label for="name">Nama lengkap</label><input class="input" id="name" autocomplete="name" required></div>' +
+      '<div class="field"><label for="email">Email</label><input class="input" id="email" type="email" autocomplete="username" required></div>' +
+      pw("password", "Kata sandi (min. 10 karakter)", "new-password") + pw("confirm", "Ulangi kata sandi", "new-password") +
+      '<div data-err></div><button type="submit" class="btn btn--primary">Buat akun & masuk</button></form>';
+    bindEyes();
+    var f = view.querySelector("form");
+    f.onsubmit = function (e) {
+      e.preventDefault(); err("");
+      if (f.password.value.length < 10) return err("Kata sandi minimal 10 karakter.");
+      if (f.password.value !== f.confirm.value) return err("Ulangan kata sandi belum sama.");
+      var b = f.querySelector("button[type=submit]"); b.classList.add("is-busy");
+      A.api.call("setup", { name: f.name.value, email: f.email.value, password: f.password.value }).then(function () { location.replace("index.html"); },
+        function (x) { b.classList.remove("is-busy"); err(x.message); });
+    };
+    setTimeout(function () { f.name.focus(); }, 50);
+  }
+  A.api.detect().then(function (st) {
+    if (st.user) return location.replace("index.html");
+    if (st.needsSetup) setup(); else login(A.api.mode === "demo");
+  });
+})();
+</script>
+</body>
+</html>

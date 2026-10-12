@@ -9,7 +9,9 @@
 var PKP_CONTACT = {
   endpoint: "https://formsubmit.co/ajax/alfian.ma18@gmail.com",
   fallbackEmail: "alfian.ma18@gmail.com",   // dipakai tombol "kirim lewat aplikasi email" bila gagal
-  subjectPrefix: "Pesan baru dari website PKP"
+  subjectPrefix: "Pesan baru dari website PKP",
+  // Salinan pesan juga disimpan di Kotak Masuk SuperAdmin (butuh hosting ber-PHP; diabaikan bila tidak ada)
+  inbox: "admin/api/index.php?r=messages/submit"
 };
 
 (function () {
@@ -308,6 +310,9 @@ var PKP_CONTACT = {
       if (form.elements._honey && form.elements._honey.value) { showSuccess(); return; }
 
       var f = form.elements, kebText = f.kebutuhan.options[f.kebutuhan.selectedIndex].text;
+      // Email penerima dapat diatur dari SuperAdmin (atribut data-recipient pada form)
+      var rec = form.getAttribute("data-recipient");
+      if (rec && /^\S+@\S+\.\S+$/.test(rec)) { PKP_CONTACT.endpoint = "https://formsubmit.co/ajax/" + rec; PKP_CONTACT.fallbackEmail = rec; }
       var data = {
         "Nama": f.nama.value.trim(),
         "Perusahaan": f.perusahaan.value.trim() || "-",
@@ -334,6 +339,14 @@ var PKP_CONTACT = {
         alertBox.hidden = false; alertBox.setAttribute("tabindex", "-1"); alertBox.focus();
       };
 
+      var inboxOk = (window.fetch ? fetch(PKP_CONTACT.inbox, {
+        method: "POST", headers: { "Content-Type": "application/json" }, keepalive: true,
+        body: JSON.stringify({ name: data.Nama, company: f.perusahaan.value.trim(), email: data.Email, phone: f.telepon.value.trim(),
+          topic: kebText, message: data.Pesan, page: location.pathname, _honey: "" })
+      }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) { return !!(j && j.ok); }).catch(function () { return false; }) : Promise.resolve(false));
+      // Bila FormSubmit gagal tetapi pesan sudah masuk Kotak Masuk SuperAdmin, tetap dianggap terkirim
+      var fail = function (title, detail) { inboxOk.then(function (ok) { if (ok) showSuccess(); else showError(title, detail); }); };
+
       if (alertBox) alertBox.hidden = true;
       setBusy(true);
       var ctrl = window.AbortController ? new AbortController() : null;
@@ -347,16 +360,21 @@ var PKP_CONTACT = {
         return res.json().catch(function () { return { success: res.ok }; });
       }).then(function (res) {
         clearTimeout(timer);
-        if (res && (res.success === true || res.success === "true")) { showSuccess(); return; }
+        if (res && (res.success === true || res.success === "true")) {
+          showSuccess();
+          // Google Analytics 4: catat sebagai konversi "generate_lead" (hanya jika GA terpasang)
+          if (typeof window.gtag === "function") window.gtag("event", "generate_lead", { form_name: "kontak", kebutuhan: kebText });
+          return;
+        }
         var msg = (res && res.message) || "";
         if (/activat/i.test(msg)) {
-          showError("Formulir belum diaktifkan.", "Pemilik website perlu mengeklik tautan aktivasi yang dikirim FormSubmit ke email penerima, lalu kirim ulang pesan ini.");
+          fail("Formulir belum diaktifkan.", "Pemilik website perlu mengeklik tautan aktivasi yang dikirim FormSubmit ke email penerima, lalu kirim ulang pesan ini.");
         } else {
-          showError("Pesan belum terkirim.", (msg ? msg + ". " : "") + "Coba kirim ulang beberapa saat lagi.");
+          fail("Pesan belum terkirim.", (msg ? msg + ". " : "") + "Coba kirim ulang beberapa saat lagi.");
         }
       }).catch(function () {
         clearTimeout(timer);
-        showError("Pesan belum terkirim.", "Koneksi internet terputus atau layanan pengiriman tidak dapat dijangkau. Periksa koneksi lalu coba lagi.");
+        fail("Pesan belum terkirim.", "Koneksi internet terputus atau layanan pengiriman tidak dapat dijangkau. Periksa koneksi lalu coba lagi.");
       });
     });
     var again = $("#form-again");

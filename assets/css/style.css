@@ -76,8 +76,9 @@
   --fs-xs: 0.75rem;
 
   /* Layout */
-  --container: 1180px;
-  --gutter: clamp(1rem, 0.5rem + 2vw, 1.5rem);
+  /* Lebar konten ikut layar: 1180px s/d ±1440px, ±1480px di 1920px, maksimal 1600px (layar 2K/4K) */
+  --container: clamp(1180px, 62.5vw + 280px, 1600px);
+  --gutter: clamp(1rem, 0.5rem + 2vw, 2.5rem);
   --section-y: clamp(5rem, 3.5rem + 5vw, 8.5rem);   /* jarak antar section (atas & bawah) */
   --header-h: 80px;
 
@@ -413,22 +414,18 @@ body.no-scroll { overflow: hidden; }
   box-shadow: var(--shadow-lift), 0 0 0 1px var(--line); max-width: 980px; margin-inline: auto;
 }
 .iso-doc { background: var(--mist); padding: clamp(1.5rem, 1rem + 2vw, 2.5rem); display: grid; place-items: center; }
-.cert {
-  width: 100%; max-width: 320px; aspect-ratio: 1 / 1.414; background: #fff; border-radius: 6px; padding: 22px 20px;
-  box-shadow: 0 20px 40px rgba(13,58,92,0.16); display: flex; flex-direction: column; align-items: center; text-align: center;
-  border: 1px solid var(--line); position: relative; overflow: hidden;
-}
-.cert::before { content: ""; position: absolute; inset: 8px; border: 2px solid #D6B25E; border-radius: 3px; pointer-events: none; }
-.cert-top { font-family: Georgia, "Times New Roman", serif; font-size: 1.375rem; color: #1E3A5F; margin-top: 10px; letter-spacing: 0.02em; }
-.cert-sub { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-4); margin-top: 2px; }
-.cert-line { width: 60%; height: 1px; background: var(--line); margin: 14px 0; }
-.cert-org { font-size: 11px; font-weight: 700; color: var(--ink); }
-.cert-std { font-size: 18px; font-weight: 800; color: var(--navy-700); margin-top: 10px; letter-spacing: -0.01em; }
-.cert-scope { font-size: 8.5px; color: var(--ink-3); margin-top: 8px; line-height: 1.5; padding: 0 8px; }
-.cert-seals { display: flex; gap: 10px; margin-top: auto; }
-.cert-seals i { width: 34px; height: 34px; border-radius: 50%; border: 2px solid var(--line-2); display: block; }
-.cert-seals i:nth-child(2) { border-color: #D6B25E; background: radial-gradient(circle, #F6E7BB, #D6B25E); }
-.cert-dummy { position: absolute; top: 18px; right: -34px; transform: rotate(35deg); background: var(--amber-500); color: var(--navy-900); font-size: 8px; font-weight: 800; letter-spacing: 0.14em; padding: 4px 40px; }
+/* Sertifikat ISO asli (klik untuk melihat ukuran penuh) */
+.cert-photo { position: relative; display: block; width: 100%; max-width: 340px; border-radius: 6px; overflow: hidden; background: #fff;
+  border: 1px solid var(--line); box-shadow: 0 20px 40px rgba(13,58,92,0.16);
+  transition: transform 300ms var(--ease-out), box-shadow 300ms var(--ease-out); }
+.cert-photo .cert-img, .cert-photo .media-img { display: block; width: 100%; height: auto; }
+a.cert-photo:hover { transform: translateY(-4px); box-shadow: 0 28px 56px rgba(13,58,92,0.22); }
+.cert-zoom { position: absolute; right: 10px; bottom: 10px; display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px;
+  border-radius: 999px; background: rgba(10,44,70,0.88); color: #fff; font-size: var(--fs-xs); font-weight: 600;
+  opacity: 0; transform: translateY(4px); transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out); }
+.cert-zoom .icon { width: 14px; height: 14px; }
+a.cert-photo:hover .cert-zoom, a.cert-photo:focus-visible .cert-zoom { opacity: 1; transform: none; }
+@media (hover: none) { .cert-zoom { opacity: 1; transform: none; } }
 .iso-info { padding: clamp(1.75rem, 1rem + 3vw, 3.5rem); display: flex; flex-direction: column; justify-content: center; }
 .iso-info .verified { display: inline-flex; align-items: center; gap: 8px; font-size: var(--fs-xs); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #0B8A64; }
 .iso-info h3 { font-size: clamp(2rem, 1.5rem + 2vw, 2.75rem); margin-top: 12px; letter-spacing: -0.022em; }
@@ -918,11 +915,35 @@ body.no-scroll { overflow: hidden; }
 }
 @media (max-width: 400px) {
   .apps-grid { grid-template-columns: 1fr 1fr; }
+  .grid-4 { grid-template-columns: 1fr; }        /* HP kecil: kartu 4 kolom jadi 1 agar judul panjang tidak terpotong */
 }
+.grid-2 > *, .grid-3 > *, .grid-4 > *, .apps-grid > *, .post-grid > * { min-width: 0; }
 .infra-item:last-child:nth-child(odd) { grid-column: 1 / -1; }
 @media (max-width: 640px) {
   .post-thumb { aspect-ratio: 16 / 10; }
   .photo-frame { aspect-ratio: 4 / 3.4; }
+}
+
+/* ---------- Layar besar (≥1600px: 1680, 1920, 2K, 4K) ----------
+   Konten melebar (lihat --container) dan skala huruf/jarak naik sedikit
+   agar tata letak tetap lega & proporsional, tidak menumpuk di tengah. */
+@media (min-width: 1600px) {
+  html { font-size: 106.25%; }                 /* 17px — semua ukuran berbasis rem ikut naik */
+  .hero-grid { gap: clamp(56px, 4vw, 96px); }
+  .hero-lead { max-width: 36rem; }
+  .page-lead { max-width: 40rem; }
+  .section-head { max-width: 800px; }
+  .grid-2, .grid-3, .stats-band, .steps { gap: 28px; }
+  .grid-4, .apps-grid { gap: 24px; }
+  .post-grid { gap: 56px 28px; }
+  .logo-grid { gap: 18px; }
+  .ptabs { grid-template-columns: 360px 1fr; }
+  .article-layout { grid-template-columns: minmax(0, 54rem) 340px; justify-content: space-between; }  /* panjang baris artikel tetap nyaman dibaca */
+  .footer-grid { gap: 56px; }
+  .footer-brand p { max-width: 380px; }
+}
+@media (min-width: 2200px) {
+  html { font-size: 112.5%; }                  /* 18px untuk layar 2K/4K */
 }
 
 /* ---------- Logo partner (gambar) ---------- */
