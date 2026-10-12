@@ -46,13 +46,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- Font dimuat tanpa memblokir render (teks tampil dulu dengan font sistem, lalu berganti ke Inter) -->
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap"></noscript>
-<link rel="stylesheet" href="assets/css/style.min.css?v=c7a62044">
+<link rel="stylesheet" href="assets/css/style.min.css?v=d5a8864f">
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P42QXVXJ"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 <div class="route-loader" id="route-loader" data-mpa aria-hidden="true">
   <div class="rl-grid"></div>
   <div class="rl-core">
@@ -89,7 +85,7 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
     <nav class="drawer-nav" aria-label="Navigasi mobile"><a href="index.html" aria-current="page">Beranda</a><a href="tentang.html">Tentang</a><a href="produk.html">Produk</a><a href="layanan.html">Layanan</a><a href="partner.html">Partner</a><a href="karir.html">Karir</a><a href="training.html">Training</a><a href="blog.html">Blog</a></nav>
     <div class="drawer-cta">
       <a class="btn btn--primary btn--block" href="kontak.html">Hubungi Kami <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
-      <div class="drawer-contact"><a href="tel:+622184311636">(021) 84311636</a><a href="mailto:marketing@pkp.co.id">marketing@pkp.co.id</a></div>
+      <div class="drawer-contact" data-cms="drawer-contact"><a href="tel:+622184311636">(021) 84311636</a><a href="mailto:marketing@pkp.co.id">marketing@pkp.co.id</a></div>
     </div>
   </div>
 </div>
@@ -101,13 +97,13 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
     <div class="hero-grid">
       <div>
         <span class="iso-pill hero-in"><span class="seal"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span>ISO 9001:2015 Certified</span>
-        <h1 class="hero-title hero-in" id="hero-title" style="--d:60ms">Partner Terpercaya <span class="text-amber">Transformasi Digital</span> Bisnis Anda</h1>
-        <p class="hero-lead hero-in" style="--d:120ms">PT. Prawathiya Karsa Pradiptha (PKP) menyediakan Enterprise Business Solution, IT Professional Service, IT Managed Service, Mobile Application, dan Call Center Service sejak 2012.</p>
-        <div class="hero-actions hero-in" style="--d:180ms">
+        <h1 class="hero-title hero-in" id="hero-title" style="--d:60ms" data-cms="hero-title">Partner Terpercaya <span class="text-amber">Transformasi Digital</span> Bisnis Anda</h1>
+        <p class="hero-lead hero-in" style="--d:120ms" data-cms="hero-lead">PT. Prawathiya Karsa Pradiptha (PKP) menyediakan Enterprise Business Solution, IT Professional Service, IT Managed Service, Mobile Application, dan Call Center Service sejak 2012.</p>
+        <div class="hero-actions hero-in" style="--d:180ms" data-cms="hero-actions">
           <a class="btn btn--primary" href="produk.html">Lihat Produk Kami <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
           <a class="btn btn--ghost-light" href="kontak.html">Konsultasi Gratis</a>
         </div>
-        <div class="hero-stats hero-in" style="--d:240ms">
+        <div class="hero-stats hero-in" style="--d:240ms" data-cms="hero-stats">
           <div class="hero-stat"><strong data-count="2012">2012</strong><span>Beroperasi Sejak</span></div>
           <div class="hero-stat"><strong data-count="1">1</strong><span>Sertifikasi ISO</span></div>
           <div class="hero-stat"><strong data-count="30" data-suffix="+">30+</strong><span>Klien &amp; Partner</span></div>
@@ -142,7 +138,7 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
   </div>
   <div class="container trusted">
     <p>DIPERCAYA OLEH PERUSAHAAN PERBANKAN, ASURANSI &amp; MULTIFINANCE TERKEMUKA</p>
-    <ul><li>PERBANKAN</li><li>ASURANSI</li><li>MULTIFINANCE</li><li>LOGISTIK</li><li>PEMERINTAHAN</li><li>RITEL</li></ul>
+    <ul data-cms="hero-trusted"><li>PERBANKAN</li><li>ASURANSI</li><li>MULTIFINANCE</li><li>LOGISTIK</li><li>PEMERINTAHAN</li><li>RITEL</li></ul>
   </div>
 </section>
 
@@ -183,7 +179,7 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
       <div class="ps-col" data-reveal>
         <div class="ps-col-head"><span class="dot"></span><h3>Product</h3></div>
         <p>Solusi perangkat lunak untuk industri keuangan, kesehatan, dan enterprise.</p>
-        <ul class="ps-list">
+        <ul class="ps-list" data-cms="home-ps-product">
           <li><a href="produk.html#fincore"><span class="ps-ic"><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg></span>Beyond Fincore +<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
           <li><a href="produk.html#icolls"><span class="ps-ic"><svg class="icon" aria-hidden="true"><use href="#i-database"/></svg></span>iColls — Integrated Collection System<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
           <li><a href="produk.html#semeru"><span class="ps-ic"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg></span>Semeru ERP<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
@@ -196,7 +192,7 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
       <div class="ps-col ps-col--svc" data-reveal style="--d:80ms">
         <div class="ps-col-head ps-col-head--amber"><span class="dot"></span><h3>Service</h3></div>
         <p>Tim ahli dan layanan terkelola yang menjaga bisnis Anda tetap berjalan.</p>
-        <ul class="ps-list">
+        <ul class="ps-list" data-cms="home-ps-service">
           <li><a href="layanan.html#it-professional"><span class="ps-ic"><svg class="icon" aria-hidden="true"><use href="#i-briefcase"/></svg></span>IT Professional Services<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
           <li><a href="layanan.html#it-managed"><span class="ps-ic"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span>IT Managed Services<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
           <li><a href="layanan.html#system-integration"><span class="ps-ic"><svg class="icon" aria-hidden="true"><use href="#i-plug"/></svg></span>System Integration<svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a></li>
@@ -216,7 +212,7 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
       <span class="eyebrow">Solusi Unggulan</span>
       <h2 class="section-title" id="showcase-title">Software core finance, collection, dan HRIS untuk industri Anda</h2>
     </div>
-    <div class="ptabs" data-tabs>
+    <div class="ptabs" data-tabs data-cms="home-tabs">
       <div class="ptab-list" role="tablist" aria-label="Produk unggulan" aria-orientation="vertical" data-reveal>
         <button class="ptab" role="tab" id="t-fincore" aria-controls="p-fincore" aria-selected="true"><span class="ps-ic"><svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg></span><span><strong>Beyond Fincore +</strong><small>Loan &amp; Financing</small></span></button>
         <button class="ptab" role="tab" id="t-icolls" aria-controls="p-icolls" aria-selected="false" tabindex="-1"><span class="ps-ic"><svg class="icon" aria-hidden="true"><use href="#i-database"/></svg></span><span><strong>iColls</strong><small>Collection</small></span></button>
@@ -275,7 +271,7 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
       <span class="eyebrow">Layanan Kami</span>
       <h2 class="section-title" id="svc-title">Layanan IT Professional &amp; Managed Service</h2>
     </div>
-    <div class="grid-2" data-stagger>
+    <div class="grid-2" data-stagger data-cms="home-services">
       <article class="card svc-card"><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-briefcase"/></svg></span><h3>IT Professional Services</h3><p>Partner Anda dalam menyediakan IT Professional yang membantu menghandle recruitment process, resource management, dan people development.</p><ul class="pill-list"><li>Business Analyst</li><li>System Analyst</li><li>Programmer</li><li>Quality Assurance</li></ul></article>
       <article class="card svc-card"><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span><h3>IT Managed Services</h3><p>Partner Anda dalam memberikan pelayanan IT yang tepat agar bisnis berjalan dengan efisien.</p><ul class="pill-list"><li>Network</li><li>Server</li><li>Cloud Computing</li></ul></article>
       <article class="card svc-card"><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-plug"/></svg></span><h3>System Integration</h3><p>Solusi bagi perusahaan atau brand Anda dalam menyiapkan penjualan berbasis online.</p><ul class="pill-list"><li>Payment Point Online Bank (PPOB)</li><li>Payment Gateway</li></ul></article>
@@ -292,7 +288,7 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
       <h2 class="section-title" id="partner-title">Our Partners</h2>
       <p class="section-lead">Penyedia teknologi, telekomunikasi, cloud, dan payment yang menjadi fondasi solusi kami.</p>
     </div>
-    <ul class="logo-grid" data-stagger><li class="logo-tile"><img class="partner-logo" src="assets/img/partners/telkom.webp" alt="Telkom Indonesia" width="90" height="48" loading="lazy" decoding="async"></li>
+    <ul class="logo-grid" data-stagger data-cms="home-partners"><li class="logo-tile"><img class="partner-logo" src="assets/img/partners/telkom.webp" alt="Telkom Indonesia" width="90" height="48" loading="lazy" decoding="async"></li>
 <li class="logo-tile"><img class="partner-logo" src="assets/img/partners/telkomsigma.webp" alt="Telkomsigma" width="126" height="34" loading="lazy" decoding="async"></li>
 <li class="logo-tile"><img class="partner-logo" src="assets/img/partners/finnet.webp" alt="Finnet" width="98" height="44" loading="lazy" decoding="async"></li>
 <li class="logo-tile"><img class="partner-logo" src="assets/img/partners/xl.webp" alt="XL Axiata" width="93" height="46" loading="lazy" decoding="async"></li>
@@ -319,7 +315,7 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
       <h2 class="section-title" id="client-title">Our Clients</h2>
       <p class="section-lead">Perusahaan multifinance, koperasi, dan korporasi yang mempercayakan sistemnya kepada PKP.</p>
     </div>
-    <ul class="logo-grid" data-stagger><li class="logo-tile"><img class="partner-logo" src="assets/img/clients/fifgroup.webp" alt="FIFGROUP" width="113" height="38" loading="lazy" decoding="async"></li>
+    <ul class="logo-grid" data-stagger data-cms="home-clients"><li class="logo-tile"><img class="partner-logo" src="assets/img/clients/fifgroup.webp" alt="FIFGROUP" width="113" height="38" loading="lazy" decoding="async"></li>
 <li class="logo-tile"><img class="partner-logo" src="assets/img/clients/simgroup.webp" alt="SIMGROUP" width="80" height="50" loading="lazy" decoding="async"></li>
 <li class="logo-tile"><img class="partner-logo" src="assets/img/clients/sehati.webp" alt="Sehati" width="116" height="37" loading="lazy" decoding="async"></li>
 <li class="logo-tile"><img class="partner-logo" src="assets/img/clients/dika.webp" alt="Dika Sinar Sejahtera" width="60" height="50" loading="lazy" decoding="async"></li>
@@ -363,7 +359,7 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
       <span class="eyebrow">Blog</span>
       <h2 class="section-title" id="blog-title">Blog Terbaru</h2>
     </div>
-    <div class="post-grid" data-stagger><article class="post-card" data-cat="product">
+    <div class="post-grid" data-stagger data-cms="home-posts"><article class="post-card" data-cat="product">
   <a class="post-thumb ph" href="blog-detail.html" tabindex="-1" aria-hidden="true">
     <span class="tag tag--amber">Product</span>
     <svg class="icon ph-ic" aria-hidden="true"><use href="#i-home"/></svg>
@@ -425,7 +421,7 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
       </nav>
       <div class="footer-col">
         <h2>Kontak Kami</h2>
-        <ul class="contact-list">
+        <ul class="contact-list" data-cms="footer-contact">
           <li><span class="ci"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></span><a href="tel:+622184311636">(021) 84311636</a></li>
           <li><span class="ci"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg></span><a href="https://www.instagram.com/beyondtechid" target="_blank" rel="noopener">@beyondtechid<span class="sr-only"> di Instagram (membuka tab baru)</span></a></li>
           <li><span class="ci"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></span><a href="mailto:marketing@pkp.co.id">marketing@pkp.co.id</a></li>
@@ -436,6 +432,6 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
     <div class="footer-bottom"><span>© <span data-year>2026</span> PT. Prawathiya Karsa Pradiptha. All rights reserved.</span><span>ISO 9001:2015 Certified</span></div>
   </div>
 </footer>
-<script src="assets/js/main.min.js?v=340371fe" defer></script>
+<script src="assets/js/main.min.js?v=1a4adca7" defer></script>
 </body>
 </html>

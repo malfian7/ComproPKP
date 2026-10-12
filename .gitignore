@@ -1,0 +1,41 @@
+# =====================================================================
+#  .gitignore — Website Company Profile PKP + SuperAdmin
+# =====================================================================
+
+# --- Data SuperAdmin yang dibuat di server (JANGAN masuk Git) ---------
+# Berisi akun admin (hash kata sandi), pesan dari form kontak (data
+# pribadi pengunjung), draf konten, cadangan, dan log aktivitas.
+admin/data/*
+!admin/data/.htaccess
+!admin/data/index.html
+
+# --- Hasil kerja SuperAdmin di server ---------------------------------
+# Gambar yang diunggah lewat SuperAdmin
+assets/img/uploads/
+# Halaman artikel yang diterbitkan SuperAdmin (template tetap disimpan)
+blog-*.html
+!blog-detail.html
+
+# --- Python / Node / build ---------------------------------------------
+__pycache__/
+*.py[cod]
+node_modules/
+*.log
+
+# --- Arsip & file sementara ---------------------------------------------
+*.zip
+*.tmp
+*.bak
+*~
+
+# --- Rahasia & konfigurasi lokal ---------------------------------------
+.env
+.env.*
+
+# --- Sistem operasi & editor -------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp

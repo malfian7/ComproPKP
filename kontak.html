@@ -3,6 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P42QXVXJ');</script>
+<!-- End Google Tag Manager -->
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJ6KE69XJN"></script>
 <script>
@@ -39,7 +46,7 @@
 <!-- Font dimuat tanpa memblokir render (teks tampil dulu dengan font sistem, lalu berganti ke Inter) -->
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap"></noscript>
-<link rel="stylesheet" href="assets/css/style.min.css?v=c7a62044">
+<link rel="stylesheet" href="assets/css/style.min.css?v=d5a8864f">
 </head>
 <body>
 <div class="route-loader" id="route-loader" data-mpa aria-hidden="true">
@@ -78,7 +85,7 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
     <nav class="drawer-nav" aria-label="Navigasi mobile"><a href="index.html">Beranda</a><a href="tentang.html">Tentang</a><a href="produk.html">Produk</a><a href="layanan.html">Layanan</a><a href="partner.html">Partner</a><a href="karir.html">Karir</a><a href="training.html">Training</a><a href="blog.html">Blog</a></nav>
     <div class="drawer-cta">
       <a class="btn btn--primary btn--block" href="kontak.html">Hubungi Kami <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
-      <div class="drawer-contact"><a href="tel:+622184311636">(021) 84311636</a><a href="mailto:marketing@pkp.co.id">marketing@pkp.co.id</a></div>
+      <div class="drawer-contact" data-cms="drawer-contact"><a href="tel:+622184311636">(021) 84311636</a><a href="mailto:marketing@pkp.co.id">marketing@pkp.co.id</a></div>
     </div>
   </div>
 </div>
@@ -96,7 +103,7 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
     <div class="card" data-reveal>
       <h2 style="font-size:var(--fs-h4)">Kirim pesan</h2>
       <p style="margin:6px 0 28px;color:var(--ink-3);font-size:var(--fs-sm)">Kolom bertanda wajib diisi kecuali ditandai opsional.</p>
-      <form id="contact-form" novalidate>
+      <form id="contact-form" data-cms="contact-form" novalidate>
         <div class="form-grid">
           <div class="field"><label for="f-nama">Nama lengkap</label><input class="input" id="f-nama" name="nama" type="text" autocomplete="name" required aria-describedby="e-nama"><span class="field-error" id="e-nama" role="alert"></span></div>
           <div class="field"><label for="f-perusahaan">Perusahaan <span class="opt">(opsional)</span></label><input class="input" id="f-perusahaan" name="perusahaan" type="text" autocomplete="organization"></div>
@@ -134,19 +141,19 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
     <aside data-reveal style="--d:80ms">
       <div class="info-card">
         <h2>Kantor PKP</h2>
-        <ul class="contact-list">
+        <ul class="contact-list" data-cms="contact-info">
           <li><span class="ci"><svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg></span><span>Kawasan Niaga Citra Gran. Blok R7 No. 32, Jl. Alternatif Transyogi, Cibubur 17433</span></li>
           <li><span class="ci"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></span><a href="tel:+622184311636">(021) 84311636</a></li>
           <li><span class="ci"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></span><a href="mailto:marketing@pkp.co.id">marketing@pkp.co.id</a></li>
           <li><span class="ci"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg></span><a href="https://www.instagram.com/beyondtechid" target="_blank" rel="noopener">@beyondtechid<span class="sr-only"> di Instagram (membuka tab baru)</span></a></li>
         </ul>
-        <div class="hours">
+        <div class="hours" data-cms="contact-hours">
           <div><span>Senin – Jumat</span><b>08.30 – 17.30</b></div>
           <div><span>Sabtu – Minggu</span><b>Tutup</b></div>
         </div>
       </div>
       <div class="map-frame">
-        <iframe title="Peta lokasi kantor PKP di Cibubur" src="https://maps.google.com/maps?q=Kawasan%20Niaga%20Citra%20Gran%20Cibubur&amp;z=15&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe data-cms="contact-map" title="Peta lokasi kantor PKP di Cibubur" src="https://maps.google.com/maps?q=Kawasan%20Niaga%20Citra%20Gran%20Cibubur&amp;z=15&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </aside>
   </div>
@@ -171,7 +178,7 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
       </nav>
       <div class="footer-col">
         <h2>Kontak Kami</h2>
-        <ul class="contact-list">
+        <ul class="contact-list" data-cms="footer-contact">
           <li><span class="ci"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></span><a href="tel:+622184311636">(021) 84311636</a></li>
           <li><span class="ci"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg></span><a href="https://www.instagram.com/beyondtechid" target="_blank" rel="noopener">@beyondtechid<span class="sr-only"> di Instagram (membuka tab baru)</span></a></li>
           <li><span class="ci"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></span><a href="mailto:marketing@pkp.co.id">marketing@pkp.co.id</a></li>
@@ -182,6 +189,6 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
     <div class="footer-bottom"><span>© <span data-year>2026</span> PT. Prawathiya Karsa Pradiptha. All rights reserved.</span><span>ISO 9001:2015 Certified</span></div>
   </div>
 </footer>
-<script src="assets/js/main.min.js?v=340371fe" defer></script>
+<script src="assets/js/main.min.js?v=1a4adca7" defer></script>
 </body>
 </html>

@@ -3,6 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P42QXVXJ');</script>
+<!-- End Google Tag Manager -->
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJ6KE69XJN"></script>
 <script>
@@ -38,7 +45,7 @@
 <!-- Font dimuat tanpa memblokir render (teks tampil dulu dengan font sistem, lalu berganti ke Inter) -->
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap"></noscript>
-<link rel="stylesheet" href="assets/css/style.min.css?v=c7a62044">
+<link rel="stylesheet" href="assets/css/style.min.css?v=d5a8864f">
 </head>
 <body>
 <div class="route-loader" id="route-loader" data-mpa aria-hidden="true">
@@ -77,7 +84,7 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
     <nav class="drawer-nav" aria-label="Navigasi mobile"><a href="index.html">Beranda</a><a href="tentang.html">Tentang</a><a href="produk.html">Produk</a><a href="layanan.html" aria-current="page">Layanan</a><a href="partner.html">Partner</a><a href="karir.html">Karir</a><a href="training.html">Training</a><a href="blog.html">Blog</a></nav>
     <div class="drawer-cta">
       <a class="btn btn--primary btn--block" href="kontak.html">Hubungi Kami <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
-      <div class="drawer-contact"><a href="tel:+622184311636">(021) 84311636</a><a href="mailto:marketing@pkp.co.id">marketing@pkp.co.id</a></div>
+      <div class="drawer-contact" data-cms="drawer-contact"><a href="tel:+622184311636">(021) 84311636</a><a href="mailto:marketing@pkp.co.id">marketing@pkp.co.id</a></div>
     </div>
   </div>
 </div>
@@ -96,7 +103,7 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
       <span class="eyebrow">Layanan Kami</span>
       <h2 class="section-title" id="svc-title">Our Services</h2>
     </div>
-    <div class="grid-2" data-stagger>
+    <div class="grid-2" data-stagger data-cms="services-cards">
       <article class="card svc-card" id="it-professional"><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-briefcase"/></svg></span><h3>IT Professional Services</h3><p>Partner Anda dalam menyediakan IT Professional yang membantu menghandle recruitment process, resource management, dan people development.</p><ul class="pill-list"><li>Business Analyst</li><li>System Analyst</li><li>Programmer</li><li>Service Desk</li><li>Quality Assurance</li><li>Database Administrator</li></ul></article>
       <article class="card svc-card" id="it-managed"><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span><h3>IT Managed Services</h3><p>Partner Anda dalam memberikan pelayanan IT yang tepat agar bisnis berjalan dengan efisien.</p><ul class="pill-list"><li>Network</li><li>Server</li><li>Cloud Computing</li></ul></article>
       <article class="card svc-card" id="system-integration"><span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-plug"/></svg></span><h3>System Integration</h3><p>Solusi bagi perusahaan atau brand Anda dalam menyiapkan penjualan berbasis online.</p><ul class="pill-list"><li>Payment Point Online Bank (PPOB)</li><li>Payment Gateway</li></ul></article>
@@ -105,14 +112,14 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
   </div>
 </section>
 
-<section class="section section--night" id="infrastructure" aria-labelledby="infra-title">
+<section class="section section--night" id="infrastructure" aria-labelledby="infra-title" data-cms-section="infrastructure">
   <div class="container">
-    <div class="section-head section-head--center" data-reveal>
+    <div class="section-head section-head--center" data-reveal data-cms="infra-head">
       <span class="eyebrow">Infrastructure</span>
       <h2 class="section-title" id="infra-title">Infrastructure &amp; Services</h2>
       <p class="section-lead">Rangkaian solusi untuk merancang, membangun, dan menjaga infrastruktur IT perusahaan — dari perangkat hingga peta jalan transformasi.</p>
     </div>
-    <div class="infra-groups">
+    <div class="infra-groups" data-cms="infra-groups">
       <details class="infra-group" open data-reveal>
         <summary><span class="icon-badge icon-badge--sky" style="width:40px;height:40px"><svg class="icon" aria-hidden="true"><use href="#i-cpu"/></svg></span><div><h3>Hardware &amp; Software</h3><p>Perangkat dan sistem inti yang menjalankan operasional bisnis.</p></div><span class="count">8 layanan</span><svg class="icon" aria-hidden="true"><use href="#i-chevron-down"/></svg></summary>
         <div class="infra-items">
@@ -149,7 +156,7 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
       <h2 class="section-title" style="font-size:var(--fs-h3)">Solusi per Industri</h2>
       <p class="section-lead">Pendekatan yang disesuaikan dengan tantangan setiap sektor.</p>
     </div>
-    <div class="grid-3" data-stagger>
+    <div class="grid-3" data-stagger data-cms="industries">
       <article class="industry-card"><span class="icon-badge icon-badge--sky"><svg class="icon" aria-hidden="true"><use href="#i-network"/></svg></span><h3>Networking</h3><p>PKP siap membantu meningkatkan keamanan data dengan infrastruktur jaringan yang andal, termonitor, dan mudah dikembangkan.</p></article>
       <article class="industry-card"><span class="icon-badge icon-badge--dark"><svg class="icon" aria-hidden="true"><use href="#i-credit-card"/></svg></span><h3>Financial Services</h3><p>Kami merancang solusi fintech inovatif, seperti teknologi pembiayaan, penagihan, dan pembayaran digital yang aman dan patuh regulasi.</p></article>
       <article class="industry-card"><span class="icon-badge icon-badge--dark" style="color:var(--mint-400)"><svg class="icon" aria-hidden="true"><use href="#i-cloud"/></svg></span><h3>High Technology</h3><p>Kami menyediakan solusi cloud computing yang aman, skalabel, dan efisien untuk perusahaan berbasis teknologi.</p></article>
@@ -182,7 +189,7 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
       </nav>
       <div class="footer-col">
         <h2>Kontak Kami</h2>
-        <ul class="contact-list">
+        <ul class="contact-list" data-cms="footer-contact">
           <li><span class="ci"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></span><a href="tel:+622184311636">(021) 84311636</a></li>
           <li><span class="ci"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg></span><a href="https://www.instagram.com/beyondtechid" target="_blank" rel="noopener">@beyondtechid<span class="sr-only"> di Instagram (membuka tab baru)</span></a></li>
           <li><span class="ci"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></span><a href="mailto:marketing@pkp.co.id">marketing@pkp.co.id</a></li>
@@ -193,6 +200,6 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
     <div class="footer-bottom"><span>© <span data-year>2026</span> PT. Prawathiya Karsa Pradiptha. All rights reserved.</span><span>ISO 9001:2015 Certified</span></div>
   </div>
 </footer>
-<script src="assets/js/main.min.js?v=340371fe" defer></script>
+<script src="assets/js/main.min.js?v=1a4adca7" defer></script>
 </body>
 </html>

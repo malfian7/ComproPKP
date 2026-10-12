@@ -1,6 +1,6 @@
 # Website Company Profile — PT. Prawathiya Karsa Pradiptha (PKP)
 
-Website statis multi-halaman (HTML + CSS + JavaScript murni). Tidak perlu Node, PHP, database, atau proses build — cukup upload semua isi folder ini ke hosting.
+Website statis multi-halaman (HTML + CSS + JavaScript murni) dengan panel SuperAdmin (PHP, tanpa database). **Panduan deploy GitHub → cPanel: [`DEPLOY.md`](DEPLOY.md).**
 
 ## Isi folder
 
@@ -18,17 +18,26 @@ kontak.html           Form kontak + peta
 404.html              Halaman "tidak ditemukan"
 assets/css/style.min.css  Semua tampilan (versi minify)
 assets/js/main.min.js     Semua interaksi + pengaturan email form kontak (versi minify)
+admin/                    SuperAdmin: panel pengelola konten (lihat admin/README-ADMIN.md)
 assets/img/           Logo, favicon, gambar produk, logo partner & klien, gambar share (og-image.jpg)
 robots.txt            Izin crawler mesin pencari
 sitemap.xml           Daftar halaman untuk Google Search Console
 site.webmanifest      Info ikon untuk perangkat mobile
 .htaccess             Pengaturan hosting Apache/cPanel (cache, kompresi, halaman 404)
 .nojekyll             Agar GitHub Pages menyajikan file apa adanya
+.gitignore            File yang tidak boleh masuk Git (data admin, unggahan, dll.)
+.cpanel.yml, deploy.sh  Deploy otomatis dari cPanel Git Version Control (lihat DEPLOY.md)
+_source/              Generator halaman (build.py) untuk perubahan desain
 ```
 
 > `.htaccess` dan `.nojekyll` adalah file tersembunyi. Pastikan ikut ter-upload (di Mac tekan `Cmd + Shift + .` untuk menampilkannya).
 
+## SuperAdmin (pengelola konten)
+Folder `admin/` berisi panel SuperAdmin untuk mengatur produk, layanan, partner & klien, blog, karir, training, ISO, kontak & Instagram, pesan masuk, dan pengguna — lalu mempublikasikannya langsung ke halaman website. Buka `https://domain-anda/admin/`. Butuh hosting ber-PHP 7.4+ (tanpa database); tanpa PHP berjalan dalam mode demo. Panduan lengkap: `admin/README-ADMIN.md`.
+
 ## Cara upload
+
+Disarankan: repo GitHub private → hosting cPanel ber-PHP, ikuti [`DEPLOY.md`](DEPLOY.md). Opsi di bawah hanya untuk menampilkan website; SuperAdmin di sana berjalan dalam mode demo.
 
 ### A. GitHub Pages (gratis)
 1. Buat repository baru di GitHub, mis. `pkp-website`.

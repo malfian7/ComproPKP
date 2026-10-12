@@ -3,6 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P42QXVXJ');</script>
+<!-- End Google Tag Manager -->
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JJ6KE69XJN"></script>
 <script>
@@ -38,7 +45,7 @@
 <!-- Font dimuat tanpa memblokir render (teks tampil dulu dengan font sistem, lalu berganti ke Inter) -->
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap"></noscript>
-<link rel="stylesheet" href="assets/css/style.min.css?v=c7a62044">
+<link rel="stylesheet" href="assets/css/style.min.css?v=d5a8864f">
 </head>
 <body>
 <div class="route-loader" id="route-loader" data-mpa aria-hidden="true">
@@ -77,7 +84,7 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
     <nav class="drawer-nav" aria-label="Navigasi mobile"><a href="index.html">Beranda</a><a href="tentang.html">Tentang</a><a href="produk.html">Produk</a><a href="layanan.html">Layanan</a><a href="partner.html" aria-current="page">Partner</a><a href="karir.html">Karir</a><a href="training.html">Training</a><a href="blog.html">Blog</a></nav>
     <div class="drawer-cta">
       <a class="btn btn--primary btn--block" href="kontak.html">Hubungi Kami <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
-      <div class="drawer-contact"><a href="tel:+622184311636">(021) 84311636</a><a href="mailto:marketing@pkp.co.id">marketing@pkp.co.id</a></div>
+      <div class="drawer-contact" data-cms="drawer-contact"><a href="tel:+622184311636">(021) 84311636</a><a href="mailto:marketing@pkp.co.id">marketing@pkp.co.id</a></div>
     </div>
   </div>
 </div>
@@ -97,7 +104,7 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
       <h2 class="section-title" id="partner-title">Our Partners</h2>
       <p class="section-lead">Operator telekomunikasi, penyedia cloud, keamanan, dan payment yang menjadi fondasi solusi kami.</p>
     </div>
-    <ul class="logo-grid" data-stagger><li class="logo-tile"><img class="partner-logo" src="assets/img/partners/telkom.webp" alt="Telkom Indonesia" width="90" height="48" loading="lazy" decoding="async"></li>
+    <ul class="logo-grid" data-stagger data-cms="partners"><li class="logo-tile"><img class="partner-logo" src="assets/img/partners/telkom.webp" alt="Telkom Indonesia" width="90" height="48" loading="lazy" decoding="async"></li>
 <li class="logo-tile"><img class="partner-logo" src="assets/img/partners/telkomsigma.webp" alt="Telkomsigma" width="126" height="34" loading="lazy" decoding="async"></li>
 <li class="logo-tile"><img class="partner-logo" src="assets/img/partners/finnet.webp" alt="Finnet" width="98" height="44" loading="lazy" decoding="async"></li>
 <li class="logo-tile"><img class="partner-logo" src="assets/img/partners/xl.webp" alt="XL Axiata" width="93" height="46" loading="lazy" decoding="async"></li>
@@ -118,7 +125,7 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
 </section>
 
 <section class="section section--deep" aria-label="Ringkasan kemitraan" style="padding-block:clamp(3rem,2.5rem + 2vw,4.5rem)">
-  <div class="container stats-band" data-stagger>
+  <div class="container stats-band" data-stagger data-cms="partner-stats">
     <div class="stat-item"><strong data-count="17">17</strong><span>Partner teknologi</span></div>
     <div class="stat-item"><strong data-count="34">34</strong><span>Klien aktif</span></div>
     <div class="stat-item"><strong data-count="6">6</strong><span>Sektor industri</span></div>
@@ -133,7 +140,7 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
       <h2 class="section-title" id="client-title">Our Clients</h2>
       <p class="section-lead">Perusahaan multifinance, koperasi, asuransi, dan korporasi yang mempercayakan sistemnya kepada kami.</p>
     </div>
-    <ul class="logo-grid" data-stagger><li class="logo-tile"><img class="partner-logo" src="assets/img/clients/fifgroup.webp" alt="FIFGROUP" width="113" height="38" loading="lazy" decoding="async"></li>
+    <ul class="logo-grid" data-stagger data-cms="clients"><li class="logo-tile"><img class="partner-logo" src="assets/img/clients/fifgroup.webp" alt="FIFGROUP" width="113" height="38" loading="lazy" decoding="async"></li>
 <li class="logo-tile"><img class="partner-logo" src="assets/img/clients/simgroup.webp" alt="SIMGROUP" width="80" height="50" loading="lazy" decoding="async"></li>
 <li class="logo-tile"><img class="partner-logo" src="assets/img/clients/sehati.webp" alt="Sehati" width="116" height="37" loading="lazy" decoding="async"></li>
 <li class="logo-tile"><img class="partner-logo" src="assets/img/clients/dika.webp" alt="Dika Sinar Sejahtera" width="60" height="50" loading="lazy" decoding="async"></li>
@@ -212,7 +219,7 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
       </nav>
       <div class="footer-col">
         <h2>Kontak Kami</h2>
-        <ul class="contact-list">
+        <ul class="contact-list" data-cms="footer-contact">
           <li><span class="ci"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></span><a href="tel:+622184311636">(021) 84311636</a></li>
           <li><span class="ci"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg></span><a href="https://www.instagram.com/beyondtechid" target="_blank" rel="noopener">@beyondtechid<span class="sr-only"> di Instagram (membuka tab baru)</span></a></li>
           <li><span class="ci"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></span><a href="mailto:marketing@pkp.co.id">marketing@pkp.co.id</a></li>
@@ -223,6 +230,6 @@ try{var s=JSON.parse(sessionStorage.getItem("pkp-rl")||"null");sessionStorage.re
     <div class="footer-bottom"><span>© <span data-year>2026</span> PT. Prawathiya Karsa Pradiptha. All rights reserved.</span><span>ISO 9001:2015 Certified</span></div>
   </div>
 </footer>
-<script src="assets/js/main.min.js?v=340371fe" defer></script>
+<script src="assets/js/main.min.js?v=1a4adca7" defer></script>
 </body>
 </html>

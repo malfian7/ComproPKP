@@ -1,0 +1,8 @@
+---
+# Deploy otomatis dari cPanel → Git™ Version Control → "Deploy HEAD Commit".
+# GANTI "NAMA_USER_CPANEL" dengan username cPanel Anda (lihat di pojok kanan atas cPanel),
+# dan ubah public_html bila website dipasang di folder lain / subdomain.
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/NAMA_USER_CPANEL/public_html/
+    - /bin/bash deploy.sh $DEPLOYPATH
